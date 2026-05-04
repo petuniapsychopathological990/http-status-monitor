@@ -7,3 +7,5 @@ agents.md
 *.ignore
 lychee-x86_64-unknown-linux-musl/
 .lycheecache
+docs/.vitepress/dist/
+docs/.vitepress/cache/

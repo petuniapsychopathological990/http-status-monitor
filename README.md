@@ -1,5 +1,10 @@
 # http-status-monitor
 
+[![Docs](https://img.shields.io/badge/docs-yuis--ice.github.io%2Fhttp--status--monitor-blue)](https://yuis-ice.github.io/http-status-monitor/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
+
+**[Full documentation →](https://yuis-ice.github.io/http-status-monitor/)**
+
 A CLI tool that runs [lychee](https://github.com/lycheeverse/lychee) against a list of URLs, tracks changes in HTTP status over time, and stores metrics in a VictoriaMetrics-compatible format.
 
 The core idea: shallow "is the server up?" checks miss broken CSS, 404'd JS, and dead API endpoints that lychee catches by checking every linked asset on the page. This tool wraps lychee with state tracking so you can see when anything changes — not just whether the server responds.
