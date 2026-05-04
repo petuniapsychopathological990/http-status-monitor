@@ -1,0 +1,25 @@
+{
+  "name": "http-status-monitor",
+  "version": "0.1.0",
+  "description": "CLI tool that runs lychee against a list of URLs and tracks HTTP status changes over time",
+  "main": "http-status-monitor.mts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "http-monitoring",
+    "lychee",
+    "cli",
+    "status-monitor"
+  ],
+  "author": "yuis-ice",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "canonicalize": "^3.0.0",
+    "diff": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/diff": "^8.0.0",
+    "@types/node": "^25.6.0"
+  }
+}

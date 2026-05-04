@@ -1,0 +1,9 @@
+node_modules/
+data/
+.meta/
+agent-references/
+.opencode
+agents.md
+*.ignore
+lychee-x86_64-unknown-linux-musl/
+.lycheecache
